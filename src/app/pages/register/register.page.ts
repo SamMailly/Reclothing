@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Register, RegisterService } from './../../services/register/register.service';
 import { ActivatedRoute } from '@angular/router';
 import { LoadingController, NavController } from '@ionic/angular';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { auth } from 'firebase/app';
 
 @Component({
   selector: 'app-register',
@@ -21,7 +23,7 @@ export class RegisterPage implements OnInit {
 
   registerId = null;
   constructor(private registerService: RegisterService, private route: ActivatedRoute,
-     private loadingController: LoadingController, private nav: NavController) { }
+     private loadingController: LoadingController, private nav: NavController, public afAuth: AngularFireAuth) { }
 
   ngOnInit() {
     this.registerId = this.route.snapshot.params['id'];
@@ -56,7 +58,8 @@ export class RegisterPage implements OnInit {
       enteredName.trim().length <= 0 ||
       enteredCompany.trim().length <= 0 ||
       enteredEmail.trim().length <= 0 ||
-      enteredConfirmPassword.trim().length <= 0
+      enteredConfirmPassword.trim().length <= 0 ||
+      enteredPassword != enteredConfirmPassword
       ){
         this.presentAlert();
       }else if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(enteredEmail)){
@@ -65,6 +68,7 @@ export class RegisterPage implements OnInit {
           message: 'Registering..'
         });
         await loading.present();
+        const res = await this.afAuth.auth.createUserWithEmailAndPassword(this.register.email, this.register.password)
         if (this.registerId){
           this.registerService.updateRegister(this.register, this.registerId).then(() =>{
             loading.dismiss();
