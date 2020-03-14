@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { Form, FormService } from './../services/form/form.service';
-import { Register, RegisterService } from './../services/register/register.service'
+import { Form, FormService } from './../../services/form/form.service';
+import { Register, RegisterService } from './../../services/register/register.service'
 
 @Component({
-  selector: 'app-home',
-  templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
+  selector: 'app-homeform',
+  templateUrl: './homeform.page.html',
+  styleUrls: ['./homeform.page.scss'],
 })
-export class HomePage implements OnInit {
+export class HomeformPage implements OnInit {
   forms: Form[];
   registers: Register[];
+
 
   constructor(private formService: FormService, private registerService: RegisterService) { }
 
@@ -26,4 +27,5 @@ export class HomePage implements OnInit {
     this.formService.removeForm(item.id);
     this.registerService.removeRegister(item.id);
   }
+
 }

@@ -15,8 +15,6 @@ export class LoginPage implements OnInit {
     password: '',
   }
 
-
-  loginId = null;
   constructor(public afAuth: AngularFireAuth ) { }
 
   ngOnInit() {
@@ -30,14 +28,41 @@ export class LoginPage implements OnInit {
     document.body.appendChild(alert);
     return alert.present();
   }
+
+  async alertEmail() {
+    const alert = document.createElement('ion-alert');
+    alert.message = 'You have entered an invalid email address!';
+    alert.buttons = ['OK'];
+
+    document.body.appendChild(alert);
+    return alert.present();
+  }
+
+  async wrongPassword(){
+    const alert = document.createElement('ion-alert');
+    alert.message = 'Wrong Password!';
+    alert.buttons = ['OK'];
+
+    document.body.appendChild(alert);
+    return alert.present();
+  }
+
   async log(){
     try{
       const res = await this.afAuth.auth.signInWithEmailAndPassword(this.login.email, this.login.password)
     }catch(err){
       console.dir(err)
       if (err.code === "auth/user-not-found"){
-          this.alertUserNotFound();
+         var errMessage = err.message;
+         //this.alertUserNotFound();
+          
+      }else if (err.code === "auth/invalid-email"){
+          this.alertEmail();
+      }else if (err.code === "auth/wrong-password") {
+          this.wrongPassword();
       }
+
+
     }
   }
 }

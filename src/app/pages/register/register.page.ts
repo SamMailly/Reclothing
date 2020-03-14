@@ -52,6 +52,7 @@ export class RegisterPage implements OnInit {
     const enteredEmail = (<HTMLInputElement>document.getElementById("input-email")).value;
     const enteredConfirmPassword = (<HTMLInputElement>document.getElementById("input-confirm-password")).value;
 
+    try{
     if(
       enteredUsername.trim().length <= 0 ||
       enteredPassword.trim().length <= 0 ||
@@ -62,13 +63,13 @@ export class RegisterPage implements OnInit {
       enteredPassword != enteredConfirmPassword
       ){
         this.presentAlert();
-      }else if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(enteredEmail)){
-
+      }else{
+        const res = await this.afAuth.auth.createUserWithEmailAndPassword(this.register.email, this.register.password)
         const loading = await this.loadingController.create({
           message: 'Registering..'
         });
         await loading.present();
-        const res = await this.afAuth.auth.createUserWithEmailAndPassword(this.register.email, this.register.password)
+
         if (this.registerId){
           this.registerService.updateRegister(this.register, this.registerId).then(() =>{
             loading.dismiss();
@@ -81,10 +82,24 @@ export class RegisterPage implements OnInit {
           });
         }
         this.confirmAlert();
-      }else{
-        this.alertEmail();
+      }
+      }catch(err){
+        if (err.code === "auth/invalid-email"){
+            this.alertEmail();
+        }else if (err.code === "auth/weak-password") {
+            this.alertPassword();
+        }
       }
   }
+
+    async alertPassword(){
+      const alert = document.createElement('ion-alert');
+      alert.message = 'You have entered an invalid password (must be more than 6 characters)!';
+      alert.buttons = ['OK'];
+
+      document.body.appendChild(alert);
+      return alert.present();
+    }
 
     async alertEmail() {
       const alert = document.createElement('ion-alert');

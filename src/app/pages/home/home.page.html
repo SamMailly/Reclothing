@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="primary">
     <ion-title>
-      Ionic Firestore
+      Home Page
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -20,8 +20,8 @@
     <ion-item-sliding *ngFor="let item of forms">
       <ion-item lines="inset" button [routerLink]="['/form', item.id]">
         <ion-label>
-          {{ item.article }}
           {{ item.quantity }}
+          {{ item.article }}
           {{ item.price }}
         </ion-label>
       </ion-item>
@@ -62,14 +62,28 @@
       </ion-item-options>
     </ion-item-sliding>
   </ion-list>
-    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-
-        <ion-fab-button routerLink="/form" routerDirection="forward">
-          <ion-icon name="add">Add new form</ion-icon>
-        </ion-fab-button>
-        <ion-fab-button routerLink="/register" routerDirection="forward">
-          <ion-icon name="add">Add new register</ion-icon>
-        </ion-fab-button>
-
-    </ion-fab>
+  <ion-tabs>
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button tab="feed">
+        <ion-icon name="book-outline"></ion-icon>
+        <ion-label>Feed</ion-label>
+      </ion-tab-button>
+      <ion-tab-button tab="notifications">
+        <ion-icon name="notifications"></ion-icon>
+        <ion-label>Notifications</ion-label>
+      </ion-tab-button>
+      <ion-tab-button tab="settings">
+        <ion-icon name="settings-outline"></ion-icon>
+        <ion-label>Settings</ion-label>
+      </ion-tab-button>
+      <ion-tab-button tab="message">
+        <ion-icon name="chevron-down-circle-outline"></ion-icon>
+        <ion-label>Message</ion-label>
+      </ion-tab-button>
+      <ion-tab-button tab="homeform">
+        <ion-icon name="chevron-down-circle-outline"></ion-icon>
+        <ion-label>Add New Form</ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
 </ion-content>
