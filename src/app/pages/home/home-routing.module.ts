@@ -8,52 +8,11 @@ const routes: Routes = [
     path: '',
     component: HomePage,
     children: [
-      {
-        path: 'feed',
-        children:[
-          {
-            path: '',
-            loadChildren: () => import('../feed/feed.module').then( m => m.FeedPageModule)
-          }
-        ]
-      },
-      {
-        path: 'notifications',
-        children:[
-          {
-            path: '',
-            loadChildren: () => import('../notifications/notifications.module').then( m => m.NotificationsPageModule)
-          }
-        ]
-      },
-      {
-        path: 'message',
-        children:[
-          {
-            path: '',
-            loadChildren: () => import('../message/message.module').then( m => m.MessagePageModule)
-          }
-        ]
-      },
-
-      {
-        path: 'settings',
-        children:[
-          {
-            path: '',
-            loadChildren: () => import('../settings/settings.module').then( m => m.SettingsPageModule)
-          }
-        ]
-      },
-      {
-        path: 'homeform',
-        children:[
-          {
-            path: '',
-            loadChildren: () => import('../homeform/homeform.module').then( m => m.HomeformPageModule)
-          }
-        ]
-      }
+      { path: 'feed', loadChildren: '../feed/feed.module#FeedPageModule'},
+      { path: 'notifications', loadChildren: '../notifications/notifications.module#NotificationsPageModule'},
+      { path: 'message', loadChildren: '../message/message.module#MessagePageModule'},
+      { path: 'settings', loadChildren: '../settings/settings.module#SettingsPageModule'},
+      { path: 'homeform', loadChildren: '../homeform/homeform.module#HomeformPageModule'}
     ]
   }
 ];

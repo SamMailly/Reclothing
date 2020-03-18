@@ -12,10 +12,10 @@ export interface Login{
   providedIn: 'root'
 })
 export class LoginService {
-  /*private loginsCollection: AngularFirestoreCollection<Login>;
+  private loginsCollection: AngularFirestoreCollection<Login>;
   private logins: Observable<Login[]>;
 
-  constructor(db: AngularFirestore) { }
+  constructor(db: AngularFirestore) { 
   this.loginsCollection = db.collection<Login>('logins');
 
   this.logins = this.loginsCollection.snapshotChanges().pipe(
@@ -29,8 +29,6 @@ export class LoginService {
   );
 
   }
-
-
   getlogins() {
   return this.logins;
   }
@@ -49,6 +47,6 @@ export class LoginService {
 
   removeLogin(id){
   return this.loginsCollection.doc(id).delete();
-}*/
+  }
 
 }

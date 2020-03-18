@@ -4,34 +4,18 @@ import { WelcomePage } from './welcome.page';
 
 const routes: Routes = [
   {
-    path: '',
-    component: WelcomePage,
-    children: [
-      {
-        path: 'login',
-        children:[
-          {
-            path: '',
-            loadChildren: () => import('../login/login.module').then( m => m.LoginPageModule)
-          }
-        ]
-      },
-      {
-        path: 'register',
-        children:[
-          {
-            path: '',
-            loadChildren: () => import('../register/register.module').then( m => m.RegisterPageModule)
-          }
-        ]
-      }
-    ]
-  },
-  {
-    path: '',
+    path:'',
     redirectTo: 'welcome',
     pathMatch: 'full'
-  }
+  },
+  {
+      path: '',
+      component: WelcomePage,
+      children: [
+          { path: 'login', loadChildren: '../login/login.module#LoginPageModule'},
+          { path: 'register', loadChildren: '../register/register.module#RegisterPageModule'}
+      ]
+    },
 ];
 
 @NgModule({
