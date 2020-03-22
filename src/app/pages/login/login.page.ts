@@ -53,13 +53,13 @@ export class LoginPage implements OnInit {
     try{
       const res = await this.afAuth.auth.signInWithEmailAndPassword(this.login.email, this.login.password)
 
-      this.router.navigate(['/home'])
+      //this.router.navigate(['/', 'menu'])
+      this.router.navigateByUrl('/menu/home')
     }catch(err){
       console.dir(err)
       if (err.code === "auth/user-not-found"){
-         var errMessage = err.message;
-         //this.alertUserNotFound();
-          
+         this.alertUserNotFound();
+        
       }else if (err.code === "auth/invalid-email"){
           this.alertEmail();
       }else if (err.code === "auth/wrong-password") {
