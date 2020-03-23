@@ -17,9 +17,6 @@ export class HomeformPage implements OnInit {
   ngOnInit() {
     this.formService.getForms().subscribe(res =>{
       this.forms = res;
-    this.registerService.getRegisters().subscribe(res1 =>{
-      this.registers = res1;
-    })
     })
   }
 

@@ -43,12 +43,14 @@ export class FormPage implements OnInit {
     const enteredArticle = (<HTMLInputElement>document.getElementById("input-article")).value;
     const enteredQuantity = (<HTMLInputElement>document.getElementById("input-quantity")).value;
     const enteredPrice = (<HTMLInputElement>document.getElementById("input-price")).value;
+    const enteredQuantityNum = <number><unknown>enteredQuantity;
+    const enteredPriceNum = <Number><unknown>enteredPrice;
 
 
     if(
       enteredArticle.trim().length <= 0 ||
-      enteredQuantity <= 0 ||
-      enteredPrice <= 0 ||
+      enteredQuantityNum <= 0 ||
+      enteredPriceNum <= 0 ||
       enteredQuantity.trim().length <= 0 ||
       enteredPrice.trim().length <= 0
       ){
@@ -59,17 +61,17 @@ export class FormPage implements OnInit {
           message: 'Saving Form..'
         });
         await loading.present();
-        if (this.formId){
+        /*if (this.formId){
           this.formService.updateForm(this.form, this.formId).then(() =>{
             loading.dismiss();
-            this.nav.back('home');
+            //this.nav.back('home');
           });
         } else{
           this.formService.addForm(this.form).then(() =>{
             loading.dismiss();
-            this.nav.back('home');
+            //this.nav.back('home');
           });
-        }
+        }*/
         this.confirmAlert();
       }
   }

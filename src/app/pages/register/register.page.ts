@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Register, RegisterService } from './../../services/register/register.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { LoadingController, NavController } from '@ionic/angular';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { auth } from 'firebase/app';
@@ -23,7 +23,7 @@ export class RegisterPage implements OnInit {
 
   registerId = null;
   constructor(private registerService: RegisterService, private route: ActivatedRoute,
-     private loadingController: LoadingController, private nav: NavController, public afAuth: AngularFireAuth) { }
+     private loadingController: LoadingController, private nav: NavController, public afAuth: AngularFireAuth, public router: Router) { }
 
   ngOnInit() {
     this.registerId = this.route.snapshot.params['id'];
@@ -69,18 +69,18 @@ export class RegisterPage implements OnInit {
           message: 'Registering..'
         });
         await loading.present();
-
-        if (this.registerId){
+        this.router.navigateByUrl("welcome/login")
+        /*if (this.registerId){
           this.registerService.updateRegister(this.register, this.registerId).then(() =>{
             loading.dismiss();
-            this.nav.back('home');
+            //this.nav.back('home');
           });
         } else{
           this.registerService.addRegister(this.register).then(() =>{
             loading.dismiss();
-            this.nav.back('home');
+            //this.nav.back('home');
           });
-        }
+        }*/
         this.confirmAlert();
       }
       }catch(err){
