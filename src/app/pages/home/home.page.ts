@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-
+import { AngularFireAuth } from '@angular/fire/auth';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'home',
@@ -9,14 +10,16 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class HomePage implements OnInit {
   public folder: string;
+  
 
-
-  constructor(private activatedRoute: ActivatedRoute) { }
+  constructor(private activatedRoute: ActivatedRoute, public afAuth: AngularFireAuth, public router: Router) {}
 
   ngOnInit() {
       //this.folder = this.activatedRoute.snapshot.paramMap.get('id');
   }
-  doClick(){
-    
+
+  async logout(){
+      const res = await this.afAuth.auth.signOut();
   }
+
 }

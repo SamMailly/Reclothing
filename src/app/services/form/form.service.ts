@@ -17,7 +17,7 @@ export class FormService {
   private formsCollection: AngularFirestoreCollection<Form>;
   private forms: Observable<Form[]>;
 
-  constructor(db: AngularFirestore) {
+  constructor(private db: AngularFirestore) {
     this.formsCollection = db.collection<Form>('forms');
 
     this.forms = this.formsCollection.snapshotChanges().pipe(

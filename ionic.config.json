@@ -1,5 +1,7 @@
 {
   "name": "Pa8",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

@@ -5,7 +5,6 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { WelcomePageRoutingModule } from './welcome-routing.module';
-import { Routes } from '@angular/router';
 
 import { WelcomePage } from './welcome.page';
 

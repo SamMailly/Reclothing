@@ -22,7 +22,6 @@ export class HomeformPage implements OnInit {
 
   remove(item){
     this.formService.removeForm(item.id);
-    this.registerService.removeRegister(item.id);
   }
 
 }

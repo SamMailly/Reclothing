@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Login } from './../../services/login/login.service';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { auth } from 'firebase/app';
+
 
 import { Router } from '@angular/router';
 
@@ -52,8 +52,6 @@ export class LoginPage implements OnInit {
   async log(){
     try{
       const res = await this.afAuth.auth.signInWithEmailAndPassword(this.login.email, this.login.password)
-
-      //this.router.navigate(['/', 'menu'])
       this.router.navigateByUrl('/menu/home')
     }catch(err){
       console.dir(err)

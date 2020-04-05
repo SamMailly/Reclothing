@@ -3,7 +3,6 @@ import { Register, RegisterService } from './../../services/register/register.se
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoadingController, NavController } from '@ionic/angular';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { auth } from 'firebase/app';
 
 @Component({
   selector: 'app-register',

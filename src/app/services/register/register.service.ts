@@ -18,7 +18,7 @@ export class RegisterService {
   private registersCollection: AngularFirestoreCollection<Register>;
   private registers: Observable<Register[]>;
 
-  constructor(db: AngularFirestore) {
+  constructor(private db: AngularFirestore) {
     this.registersCollection = db.collection<Register>('registers');
 
     this.registers = this.registersCollection.snapshotChanges().pipe(

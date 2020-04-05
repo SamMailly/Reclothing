@@ -15,7 +15,7 @@ export class LoginService {
   private loginsCollection: AngularFirestoreCollection<Login>;
   private logins: Observable<Login[]>;
 
-  constructor(db: AngularFirestore) { 
+  constructor(private db: AngularFirestore) { 
   this.loginsCollection = db.collection<Login>('logins');
 
   this.logins = this.loginsCollection.snapshotChanges().pipe(

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Form, FormService } from './../../services/form/form.service';
 import { ActivatedRoute } from '@angular/router';
-import { LoadingController, NavController } from '@ionic/angular';
+import { LoadingController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-form',
@@ -18,7 +19,7 @@ export class FormPage implements OnInit {
 
   formId = null;
   constructor(private formService: FormService, private route: ActivatedRoute,
-     private loadingController: LoadingController, private nav: NavController) { }
+     private loadingController: LoadingController, public router: Router) { }
 
   ngOnInit() {
     this.formId = this.route.snapshot.params['id'];
@@ -61,7 +62,7 @@ export class FormPage implements OnInit {
           message: 'Saving Form..'
         });
         await loading.present();
-        /*if (this.formId){
+        if (this.formId){
           this.formService.updateForm(this.form, this.formId).then(() =>{
             loading.dismiss();
             //this.nav.back('home');
@@ -71,8 +72,9 @@ export class FormPage implements OnInit {
             loading.dismiss();
             //this.nav.back('home');
           });
-        }*/
+        }
         this.confirmAlert();
+        this.router.navigateByUrl("/menu/homeform")
       }
   }
 
