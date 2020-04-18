@@ -1,0 +1,18 @@
+.paz {
+    position: relative;
+    z-index: 10;
+}
+img {
+    width: 150px; 
+    height: 150px; 
+    object-fit: cover; 
+    margin-left: 200px;
+    margin-right: auto;
+    }
+ion-content.background{
+  --background: url('~/assets/img/bg.jpg')  no-repeat 100% 100%;
+    }
+input[type=text] {
+    background-color: #3CBC8D;
+    color: white;
+      }

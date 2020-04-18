@@ -1,18 +1,17 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { WelcomePage } from './welcome.page';
 
+import { VirtualScrollPage } from './virtual-scroll.page';
 
 const routes: Routes = [
-
   {
-      path: '',
-      component: WelcomePage,
-  },
+    path: '',
+    component: VirtualScrollPage
+  }
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class WelcomePageRoutingModule {}
+export class VirtualScrollPageRoutingModule {}

@@ -10,7 +10,7 @@ export class MenuPage implements OnInit {
   pages = [
     {
       title: 'Message',
-      url: '/menu/message'
+      url: '/menu/messagehome'
     },
     {
       title: 'Notifications',

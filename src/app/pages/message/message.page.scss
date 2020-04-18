@@ -1,24 +1,37 @@
-ion-col{
-    border: solid black 1px;
+.message{
+	padding: 10px;
+	border-radius: 10px;
+	margin-bottom: 4px;
+	white-space: pre-wrap;
 }
-ion-grid {
-	padding: 0px!important;
-	border-top: solid 1px #d2cdcd;
+
+.other-message{
+	background: var(--ion-color-tertiary);
+	color: #fff;
 }
-.input-col {
+
+.my-message{
+	background: var(--ion-color-secondary);
+	color: #fff;
+}
+
+.time{
+	color: #dfdfdf;
+	float: right;
+	font-size: small;
+}
+
+.message-input{
+	width: 100%;
+	border: 1px solid var(--ion-color-medium);
+	border-radius: 10px;
+	background: #fff;
+	resize: none;
 	padding-left: 10px;
+	padding-right: 10px;
 }
-.send-col {
-	padding: 0px!important;
-}
-.send-col ion-button {
-	height: 100%!important;
-	margin: 0px!important;
-	border-radius: 0px !important;
-}
-.send-col button {
-	border-radius: 0px !important;
-}
-.send-col ion-icon {
-	font-size: 20px!important;
+
+.msg-btn{
+	--padding-start: 0.5em;
+	--padding-end: 0.5em;
 }

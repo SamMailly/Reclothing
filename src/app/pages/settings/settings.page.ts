@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
-
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-settings',
@@ -8,10 +7,28 @@ import { AngularFireAuth } from '@angular/fire/auth';
   styleUrls: ['./settings.page.scss'],
 })
 export class SettingsPage implements OnInit {
+  lang: any;
+  enableNotifications: any;
+  paymentMethod: any;
+  currency: any;
+  enablePromo: any;
+  enableHistory: any;
 
-  constructor(public afAuth: AngularFireAuth) { }
+  languages: any = ['English', 'Portuguese', 'French'];
+  paymentMethods: any = ['Paypal', 'Credit Card'];
+  currencies: any = ['USD', 'BRL', 'EUR'];
+
+  constructor(public navCtrl: NavController) { }
 
   ngOnInit() {
+  }
+
+  editProfile() {
+    this.navCtrl.navigateForward('edit-profil');
+  }
+
+  logout() {
+    this.navCtrl.navigateRoot('/');
   }
 
 }

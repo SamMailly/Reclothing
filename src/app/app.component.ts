@@ -37,6 +37,15 @@ export class AppComponent {
         });
         this.statusBar.styleDefault();
         this.splashScreen.hide();
+
+        this.platform.ready().then(() => {
+          // 'hybrid' detects both Cordova and Capacitor
+          if (this.platform.is('hybrid')) {
+            // make your native API calls
+          } else {
+            // fallback to browser APIs
+          }
+        });
     });
   }
 }

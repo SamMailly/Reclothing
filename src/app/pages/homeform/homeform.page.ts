@@ -9,7 +9,6 @@ import { Register, RegisterService } from './../../services/register/register.se
 })
 export class HomeformPage implements OnInit {
   forms: Form[];
-  registers: Register[];
 
 
   constructor(private formService: FormService, private registerService: RegisterService) { }

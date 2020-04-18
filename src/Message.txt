@@ -1,14 +1,59 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="menu/messagehome"></ion-back-button>
+    </ion-buttons>
+    <ion-title color="light" text-center>
+      Chat
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen="true">
+  <ion-grid>
+    <ion-row class="chat" *ngFor="let item of messages">
+      <ion-col class="message other-message" size="9" *ngIf="uid === item.userId">
+            <b class="name">
+              {{ item.name }}
+            </b><br>
+            <span>{{ item.text }}</span> 
+            <div class="time" text-right><br> {{ item.date.seconds * 1000 | date: 'yyyy/MM/dd - h:mm' }}</div>
+        </ion-col>
+        <ion-col class="message my-message" offset="3" size="9" *ngIf="uid !== item.userId">
+          <b class="name">
+            {{ item.name }}
+          </b><br>
+          <span>{{ item.text }}</span>
+          <div class="time" text-right><br> {{ item.date.seconds * 1000 | date: 'yyyy/MM/dd - h:mm' }}</div>
+        </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="sendMessage()">
+      <ion-icon name="send" expand="icon-only"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-item>
+      <ion-icon slot="start" name="camera" expand="icon-only" class="footerIcon"></ion-icon>
+      <ion-input autosize maxrows="3" id="input-text" class="message-input" type="text" placeholder="Write a message..." [(ngModel)]="message.text"></ion-input>
+      <ion-button slot="fixed" (click)="sendMessage()"></ion-button>
+      <ion-icon name="send" expand="icon-only"></ion-icon>
+    </ion-item>
+  </ion-toolbar>
+</ion-footer>
+
+
+
+
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MessageService, Message } from './../../services/message/message.service';
-import { RegisterService, Register } from './../../services/register/register.service';
 import { LoadingController, IonContent } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { Observable } from 'rxjs';
-import { DocumentSnapshot, DocumentReference } from '@angular/fire/firestore';
-import { AngularFirestore } from 'angularfire2/firestore';
-//import { EventListener } from '';
-import { map } from 'rxjs/operators';
 
 
 
@@ -25,125 +70,49 @@ export class MessagePage implements OnInit {
     date: new Date()
   }
 
+  buddy: any;
+
+  start_typing: any;
+
   messages: Message[]
 
   messageId: null;
 
-  registers: Register[];
-
-  email: string;
-
   @ViewChild(IonContent, {static: false}) content: IonContent;
-
   
   constructor( private messageservice: MessageService, private loadingController: LoadingController, private route: ActivatedRoute,
-     public afAuth: AngularFireAuth, private registerservice: RegisterService, private db: AngularFirestore) {
-        
+     public afAuth: AngularFireAuth ) {
+       
       }
 
   ngOnInit() {
-    this.messageId = this.route.snapshot.params['id'];
+  this.messageId = this.route.snapshot.params['id'];
   if (this.messageId){
     this.loadMessage();
   }
   this.messageservice.getMessages().subscribe(res =>{
     this.messages = res;
-
   });
+  
 }
-
 
 async loadMessage(){
   const loading = await this.loadingController.create({
     message: 'Loading Message..'
   });
   await loading.present();
- 
+
   this.messageservice.getMessage(this.messageId).subscribe(res => {
     loading.dismiss();
     this.message = res;
   });
 }
-
-async loadRegister(){
-  const loading = await this.loadingController.create({
-    message: 'Loading Message..'
-  });
-  await loading.present();
- 
-  this.messageservice.getMessage(this.messageId).subscribe(res => {
-    loading.dismiss();
-    this.message = res;
-  });
-}
-
-    
-  /*.catch((err) => {
-    console.log('Error getting documents', err);
-  });*/
-     /* map(actions => {
-        return actions.map(a => {
-          const name = a.name;
-          const email = a.email;
-          console.log(name, email)
-          return { email, name };
-          
-        });
-      })
-    );
-    })
-  );*/
-//}
-    retrieveData(){
-      var arrayObj: any;
-      //for(let i=0; i< this.db.collection('register').valueChanges().subscribe.length; i++){
-      this.registerservice.getRegisters().subscribe(val => 
-      {
-        for(let i=0; i < val.length; i++){
-            if (val[i].email == this.message.name)
-              this.email = val[i].email
-              console.log(this.email)
-          }
-          
-        })   
-      
-      
-        /*this.registers = this.db.collection('register').valueChanges().subscribe[i]
-        console.log("toto" + this.db.collection('register').valueChanges().subscribe)
-        this.registers.filter((x) => {
-          if(x.email === this.afAuth.auth.currentUser.email)
-            this.email = x.email
-          })
-          
-        }*/
-  
-    
-  }
 
   async sendMessage() {
     const entreredMessage = (<HTMLInputElement>document.getElementById("input-text")).value;
     this.message.date.getDate()
     this.message.userId = this.afAuth.auth.currentUser.uid
     this.message.name = this.afAuth.auth.currentUser.email
-    this.retrieveData()
-    /*this.db.('registers')
-    .then(
-      ((snapshot) => {
-        snapshot.forEach((doc) => {
-          console.log(doc.id, '=>', doc.data());
-        });
-      })*/
-    //var toto: Observable<Register[]> = null;
-    /*toto = this.retrieveData()
-    for(let i=0; this.registerservice.length(); i++){
-      if (this.afAuth.auth.currentUser.email == this.registers.email){
-        this.message.name = this.registers.name
-      }else{
-        console.log("didn't match")
-      }
-    }*/
-    
-    
     if(entreredMessage.trim().length <= 0){
         this.presentAlert();
     }else{

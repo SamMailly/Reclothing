@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 export interface Message{
+  name: string,
   userId: string,
   text: string,
   date: Date,

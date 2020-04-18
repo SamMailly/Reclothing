@@ -4,7 +4,6 @@ import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/fires
 import { map } from 'rxjs/operators';
 
 export interface Register{
-  username: string;
   password: string;
   confirmPassword: string;
   name: string;
@@ -32,7 +31,6 @@ export class RegisterService {
     );
 
   }
-
 
   getRegisters() {
   return this.registers;

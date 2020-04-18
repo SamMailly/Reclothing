@@ -12,7 +12,6 @@ import { AngularFireAuth } from '@angular/fire/auth';
 export class RegisterPage implements OnInit {
 
   register: Register = {
-    username: '',
     password: '',
     confirmPassword: '',
     name: '',
@@ -21,6 +20,7 @@ export class RegisterPage implements OnInit {
   }
 
   registerId = null;
+  //userId = null;
   constructor(private registerService: RegisterService, private route: ActivatedRoute,
      private loadingController: LoadingController, private nav: NavController, public afAuth: AngularFireAuth, public router: Router) { }
 
@@ -44,7 +44,6 @@ export class RegisterPage implements OnInit {
   }
 
   async saveRegister(){
-    const enteredUsername = (<HTMLInputElement>document.getElementById("input-username")).value;
     const enteredPassword = (<HTMLInputElement>document.getElementById("input-password")).value;
     const enteredName = (<HTMLInputElement>document.getElementById("input-name")).value;
     const enteredCompany = (<HTMLInputElement>document.getElementById("input-company")).value;
@@ -53,7 +52,6 @@ export class RegisterPage implements OnInit {
 
     try{
     if(
-      enteredUsername.trim().length <= 0 ||
       enteredPassword.trim().length <= 0 ||
       enteredName.trim().length <= 0 ||
       enteredCompany.trim().length <= 0 ||
@@ -63,13 +61,20 @@ export class RegisterPage implements OnInit {
       ){
         this.presentAlert();
       }else{
-        const res = await this.afAuth.auth.createUserWithEmailAndPassword(this.register.email, this.register.password)
+        const res = await this.afAuth.auth.createUserWithEmailAndPassword(this.register.email, this.register.password).then(()=>{
+          localStorage.setItem('email', this.afAuth.auth.currentUser.email)
+          this.afAuth.auth.currentUser.updateProfile({
+            displayName: this.register.name,
+            photoURL: ''
+          })
+        })
+          
         const loading = await this.loadingController.create({
           message: 'Registering..'
         });
         await loading.present();
-        this.router.navigateByUrl("welcome/login")
-        /*if (this.registerId){
+        this.router.navigateByUrl("/login")
+        if (this.registerId){
           this.registerService.updateRegister(this.register, this.registerId).then(() =>{
             loading.dismiss();
             //this.nav.back('home');
@@ -79,7 +84,7 @@ export class RegisterPage implements OnInit {
             loading.dismiss();
             //this.nav.back('home');
           });
-        }*/
+        }
         this.confirmAlert();
       }
       }catch(err){
@@ -131,11 +136,14 @@ export class RegisterPage implements OnInit {
     }
 
     async clear() {
-      (<HTMLInputElement>document.getElementById("input-username")).value='';
       (<HTMLInputElement>document.getElementById("input-password")).value='';
       (<HTMLInputElement>document.getElementById("input-name")).value='';
       (<HTMLInputElement>document.getElementById("input-company")).value='';
       (<HTMLInputElement>document.getElementById("input-email")).value='';
       (<HTMLInputElement>document.getElementById("input-confirm-password")).value='';
+    }
+
+    goToLogin() {
+      this.router.navigateByUrl('/login');
     }
 }

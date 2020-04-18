@@ -14,5 +14,7 @@ export class WelcomePage implements OnInit {
   ngOnInit() {
     
   }
-
+  goToLogin(){
+    this.router.navigateByUrl("/login");
+  }
 }
