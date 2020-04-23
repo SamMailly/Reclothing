@@ -7,7 +7,7 @@ export interface Message{
   name: string,
   userId: string,
   text: string,
-  date: Date,
+  date: string,
 }
 
 @Injectable({

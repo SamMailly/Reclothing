@@ -16,7 +16,8 @@ export class RegisterPage implements OnInit {
     confirmPassword: '',
     name: '',
     company: '',
-    email: ''
+    email: '',
+    userType: ''
   }
 
   registerId = null;
@@ -49,7 +50,7 @@ export class RegisterPage implements OnInit {
     const enteredCompany = (<HTMLInputElement>document.getElementById("input-company")).value;
     const enteredEmail = (<HTMLInputElement>document.getElementById("input-email")).value;
     const enteredConfirmPassword = (<HTMLInputElement>document.getElementById("input-confirm-password")).value;
-
+    const enteredUserType = (<HTMLInputElement>document.getElementById("input-userType")).value;
     try{
     if(
       enteredPassword.trim().length <= 0 ||
@@ -57,12 +58,12 @@ export class RegisterPage implements OnInit {
       enteredCompany.trim().length <= 0 ||
       enteredEmail.trim().length <= 0 ||
       enteredConfirmPassword.trim().length <= 0 ||
+      enteredUserType.trim().length <= 0 ||
       enteredPassword != enteredConfirmPassword
       ){
         this.presentAlert();
       }else{
         const res = await this.afAuth.auth.createUserWithEmailAndPassword(this.register.email, this.register.password).then(()=>{
-          localStorage.setItem('email', this.afAuth.auth.currentUser.email)
           this.afAuth.auth.currentUser.updateProfile({
             displayName: this.register.name,
             photoURL: ''
@@ -141,6 +142,7 @@ export class RegisterPage implements OnInit {
       (<HTMLInputElement>document.getElementById("input-company")).value='';
       (<HTMLInputElement>document.getElementById("input-email")).value='';
       (<HTMLInputElement>document.getElementById("input-confirm-password")).value='';
+      (<HTMLInputElement>document.getElementById("input-userType")).value='';
     }
 
     goToLogin() {

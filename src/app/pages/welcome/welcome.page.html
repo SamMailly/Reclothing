@@ -1,12 +1,31 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Welcome</ion-title>
-  </ion-toolbar>
-</ion-header>
 
-<ion-content>
-  <ion-buttons>
-    <ion-button  [routerLink]="['/login']"> Login</ion-button>
-    <ion-button [routerLink]="['/register']"> Sign Up</ion-button>
-  </ion-buttons>
+<ion-content padding class="background">
+  
+  <br><br><br><br><br><br>
+
+  <ion-row class="ion-align-items-center">
+    <ion-col size="4">
+    </ion-col>
+    <ion-col size="4">
+      <ion-img width="10" height="10" src="assets/img/logo1.png"></ion-img>
+    </ion-col>
+    <ion-col size="4">
+    </ion-col>
+  </ion-row>
+  
+  <br><br><br>
+
+  <ion-row class="ion-align-items-center" height="2000">
+    <ion-col size="3.4">
+    </ion-col>
+    <ion-col size="4">
+      <ion-buttons>
+        <ion-button expand="block" fill="solid" [routerLink]="['/login']" color="light"> Login</ion-button>
+        <ion-button expand="block" fill="solid" [routerLink]="['/register']" color="light"> Sign Up</ion-button>
+      </ion-buttons>
+    </ion-col>
+    <ion-col size="4">
+    </ion-col>
+  </ion-row>
+
 </ion-content>

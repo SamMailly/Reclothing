@@ -1,33 +1,30 @@
 <ion-header>
-  <ion-toolbar color="primary">
+  <ion-toolbar color="light">
     <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
+      <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>App Settings</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-item class="bg-profile">
-    <ion-avatar slot="start">
-      <ion-icon name="person-outline" class="user-avatar"></ion-icon>
-    </ion-avatar>
+  <ion-item class="background">
     <ion-label>
-      <ion-text color="light">
+      <ion-text style="text-align:center" color="light">
+        <br>
         <h2>
-          <strong>João Firmino</strong>
+          <strong>{{ name }}</strong>
         </h2>
       </ion-text>
-      <ion-text color="tertiary">
+      <ion-text style="text-align:center;" color="light">
         <h3>
-          firminoata@gmail.com
+          {{ email }}
         </h3>
       </ion-text>
-      <ion-button icon-left size="small" shape="round" color="dark" (click)="editProfile()">
-        <img src="https://image.flaticon.com/icons/svg/1034/1034153.svg">
+      <ion-button style ="margin-left: 60px;" icon-left size="small" shape="round" color="light" (click)="editProfile()">
         Edit profile
       </ion-button>
-      <ion-button icon-left size="small" shape="round" color="secondary" (click)="logout()">
+      <ion-button icon-left size="small" shape="round" color="dark" (click)="logout()">
         <ion-icon name="log-out"></ion-icon>
         logout
       </ion-button>
@@ -41,16 +38,16 @@
       </ion-text>
     </ion-list-header>
     <ion-item>
-      <ion-icon name="settings" slot="start" color="primary"></ion-icon>
-      <ion-label color="primary">App Language</ion-label>
+      <ion-icon name="settings" slot="start" color="success"></ion-icon>
+      <ion-label color="dark">App Language</ion-label>
       <ion-select [(ngModel)]="lang">
         <ion-select-option *ngFor="let language of languages" [value]="language">{{language}}</ion-select-option>
       </ion-select>
     </ion-item>
     <ion-item>
-      <ion-icon name="notifications" slot="start" color="primary"></ion-icon>
-      <ion-label class="label" color="primary"> Enable notifications </ion-label>
-      <ion-toggle [(ngModel)]="enableNotifications"></ion-toggle>
+      <ion-icon name="notifications" slot="start" color="success"></ion-icon>
+      <ion-label class="label" color="dark"> Enable notifications </ion-label>
+      <ion-toggle [(ngModel)]="enableNotifications" color = "success"></ion-toggle>
     </ion-item>
   </ion-list>
   <ion-list>
@@ -60,15 +57,15 @@
       </ion-text>
     </ion-list-header>
     <ion-item>
-      <ion-icon name="card" slot="start" color="primary"></ion-icon>
-      <ion-label color="primary">Payment Method</ion-label>
+      <ion-icon name="card" slot="start" color="success"></ion-icon>
+      <ion-label color="dark">Payment Method</ion-label>
       <ion-select [(ngModel)]="paymentMethod">
         <ion-select-option *ngFor="let method of paymentMethods" [value]="method">{{method}}</ion-select-option>
       </ion-select>
     </ion-item>
     <ion-item>
-      <ion-icon name="logo-usd" slot="start" color="dark"></ion-icon>
-      <ion-label color="primary">Currency</ion-label>
+      <ion-icon name="logo-usd" slot="start" color="success"></ion-icon>
+      <ion-label color="dark">Currency</ion-label>
       <ion-select [(ngModel)]="currency">
         <ion-select-option *ngFor="let currency of currencies" [value]="currency">{{currency}}</ion-select-option>
       </ion-select>
@@ -81,14 +78,14 @@
       </ion-text>
     </ion-list-header>
     <ion-item>
-      <ion-icon name="mail" slot="start" color="primary"></ion-icon>
-      <ion-label class="label" color="primary">Enable Promotions</ion-label>
-      <ion-toggle [(ngModel)]="enablePromo"></ion-toggle>
+      <ion-icon name="mail" slot="start" color="success"></ion-icon>
+      <ion-label class="label" color="dark">Enable Promotions</ion-label>
+      <ion-toggle [(ngModel)]="enablePromo" color = "success"></ion-toggle>
     </ion-item>
     <ion-item>
-      <ion-icon name="mail" slot="start" color="primary"></ion-icon>
-      <ion-label class="label" color="primary">Enable History</ion-label>
-      <ion-toggle [(ngModel)]="enableHistory"></ion-toggle>
+      <ion-icon name="mail" slot="start" color="success"></ion-icon>
+      <ion-label class="label" color="dark">Enable History</ion-label>
+      <ion-toggle [(ngModel)]="enableHistory" color = "success"></ion-toggle>
     </ion-item>
   </ion-list>
 </ion-content>

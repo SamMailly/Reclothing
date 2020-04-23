@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { VirtualScrollPage } from './virtual-scroll.page';
+import { PopoverComponent } from './popover.component';
 
-describe('VirtualScrollPage', () => {
-  let component: VirtualScrollPage;
-  let fixture: ComponentFixture<VirtualScrollPage>;
+describe('PopoverComponent', () => {
+  let component: PopoverComponent;
+  let fixture: ComponentFixture<PopoverComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ VirtualScrollPage ],
+      declarations: [ PopoverComponent ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(VirtualScrollPage);
+    fixture = TestBed.createComponent(PopoverComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

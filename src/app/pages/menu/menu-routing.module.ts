@@ -10,11 +10,12 @@ const routes: Routes = [
     children:[
       { path: 'home', loadChildren: '../home/home.module#HomePageModule'},
       { path: 'notifications', loadChildren: '../notifications/notifications.module#NotificationsPageModule'},
-      { path: 'messagehome', loadChildren: '../messagehome/messagehome.module#MessagehomePageModule'},
+      { path: 'message', loadChildren: '../message/message.module#MessagePageModule'},
       { path: 'settings', loadChildren: '../settings/settings.module#SettingsPageModule'},
-      { path: 'homeform', loadChildren: '../homeform/homeform.module#HomeformPageModule'}
+      { path: 'homeform', loadChildren: '../homeform/homeform.module#HomeformPageModule'},
+      { path: 'lists', loadChildren: '../lists/lists.module#ListsPageModule'}
     ]
-  },
+  }
 ];
 
 @NgModule({

@@ -1,9 +1,9 @@
-<ion-header translucent>
-  <ion-toolbar>
+<ion-header class="header">
+  <ion-toolbar color="light">
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="menu/messagehome"></ion-back-button>
+      <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title color="light" text-center>
+    <ion-title color="dark" text-center>
       Chat
     </ion-title>
   </ion-toolbar>
@@ -14,22 +14,17 @@
     <ion-row class="chat" *ngFor="let item of messages">
       <ion-col class="message my-message" offset="3" size="9" *ngIf="email === item.name">
             <span>{{ item.text }}</span> 
-            <div class="time" text-right><br> {{ item.date.seconds * 1000 | date: 'yyyy/MM/dd - h:mm' }}</div>
+            <div class="time" text-right><br> {{ item.date }}</div>
         </ion-col>
         <ion-col class="message other-message" size="9" *ngIf="email !== item.name">
           <b class="name">
             {{ item.name }}
           </b><br>
           <span>{{ item.text }}</span>
-          <div class="time" text-right><br> {{ item.date.seconds * 1000 | date: 'yyyy/MM/dd - h:mm' }}</div>
+          <div class="time" text-right><br> {{ item.date }}</div>
         </ion-col>
     </ion-row>
   </ion-grid>
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button (click)="sendMessage()">
-      <ion-icon name="send" expand="icon-only"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
 </ion-content>
 
 <ion-footer>
@@ -37,8 +32,9 @@
     <ion-item>
       <ion-icon slot="start" name="camera" expand="icon-only" class="footerIcon"></ion-icon>
       <ion-input autosize maxrows="3" id="input-text" class="message-input" type="text" placeholder="Write a message..." [(ngModel)]="message.text"></ion-input>
-      <ion-button slot="fixed" (click)="sendMessage()"></ion-button>
-      <ion-icon name="send" expand="icon-only"></ion-icon>
+      <ion-button color="light" fill="outline" (click)="sendMessage()" class="msg-button">
+        <ion-icon slot="end" name="send" expand="icon-only" class="message-icon"></ion-icon>
+      </ion-button>
     </ion-item>
   </ion-toolbar>
 </ion-footer>

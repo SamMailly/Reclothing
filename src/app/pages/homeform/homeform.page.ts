@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Form, FormService } from './../../services/form/form.service';
-import { Register, RegisterService } from './../../services/register/register.service'
+
 
 @Component({
   selector: 'app-homeform',
@@ -11,7 +11,7 @@ export class HomeformPage implements OnInit {
   forms: Form[];
 
 
-  constructor(private formService: FormService, private registerService: RegisterService) { }
+  constructor(private formService: FormService) { }
 
   ngOnInit() {
     this.formService.getForms().subscribe(res =>{

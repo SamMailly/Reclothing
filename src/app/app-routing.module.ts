@@ -12,11 +12,15 @@ const routes: Routes = [
   //{ path: 'home/:id', loadChildren: '../home/home.module#HomePageModule' }
   { path: 'form', loadChildren: './pages/form/form.module#FormPageModule'},
   { path: 'message', loadChildren: './pages/message/message.module#MessagePageModule'},
+  { path: 'edit-profil', loadChildren: './pages/edit-profil/edit-profil.module#EditProfilPageModule' },
   {
-    path: 'virtual-scroll',
-    loadChildren: () => import('./pages/virtual-scroll/virtual-scroll.module').then( m => m.VirtualScrollPageModule)
+    path: 'lists',
+    loadChildren: () => import('./pages/lists/lists.module').then( m => m.ListsPageModule)
   },
-  { path: 'edit-profil', loadChildren: './pages/edit-profil/edit-profil.module#EditProfilPageModule' }
+  {
+    path: 'upload',
+    loadChildren: () => import('./pages/upload/upload.module').then( m => m.UploadPageModule)
+  },
 
 
   ];

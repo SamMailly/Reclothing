@@ -1,10 +1,3 @@
-:host {
-    ion-content {
-      --background: linear-gradient(-135deg, var(--ion-color-medium), var(--ion-color-light))
-    }
-  }
-  
-  ion-avatar {
-      width: 68px;
-      height: 68px;
-  }
+.background{
+  --background: url('~/assets/img/bg.jpg')  no-repeat 100% 100%;
+}

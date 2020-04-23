@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar color="primary">
+  <ion-toolbar color="light">
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/welcome"></ion-back-button>
     </ion-buttons>
@@ -7,128 +7,105 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding class="login auth-page">
 
+
+<ion-content padding class="background">
   <div class="auth-content">
-    <!-- Logo -->
-    <div padding-horizontal text-center>
-      <div class="logo"></div>
-      <h3 no-margin>
-        <ion-text color="light" class="fw700">
-          <ion-text color="secondary">Register</ion-text>
-        </ion-text>
-      </h3>
-    </div>
+    
 
-    <!-- Register form -->
-    <form class="list-form">
-      <ion-item no-padding class="animated fadeInUp">
-        <ion-label position="floating">
-          <ion-icon name="person-circle-outline" item-start></ion-icon>
-          Full Name
-        </ion-label>
-          <ion-input required type="text" id="input-name" [(ngModel)]="register.name" name="name"></ion-input>
-      </ion-item>
-      <p ion-text class="text08">
-        <ion-text color="warning">
-          This field is required
-        </ion-text>
-      </p>
+    <br><br><br>
 
-      <ion-item no-padding class="animated fadeInUp">
-        <ion-label position="floating">
-          <ion-icon name="mail" item-start></ion-icon>
-          Email
-        </ion-label>
-        <ion-input required type="text" id="input-email" [(ngModel)]="register.email" name="email"></ion-input>
-      </ion-item>
-      <p ion-text class="text08">
-        <ion-text color="warning">
-          This field is required
-        </ion-text>
-      </p>
 
-      <ion-item no-padding class="animated fadeInUp">
-        <ion-label position="floating">
-          <ion-icon name="lock-closed-outline" item-start></ion-icon>
-          Password
-        </ion-label>
-        <ion-input required type="password" id="input-password" [(ngModel)]="register.password" name="password"></ion-input>
-      </ion-item>
-      <p ion-text color="warning" class="text08">
-        <ion-text color="warning">
-          This field is required
-        </ion-text>
-      </p>
-      <ion-item no-padding class="animated fadeInUp">
-        <ion-label position="floating">
-          <ion-icon name="lock-closed-outline" item-start></ion-icon>
-          Confirm Password
-        </ion-label>
-        <ion-input required type="password" id="input-confirm-password" [(ngModel)]="register.confirmPassword" name="confirmpassword"></ion-input>
-      </ion-item>
-      <p ion-text color="warning" class="text08">
-        <ion-text color="warning">
-          This field is required
-        </ion-text>
-      </p>
-      <ion-item no-padding class="animated fadeInUp">
-        <ion-label position="floating">
-          <ion-icon name="briefcase-outline" item-start></ion-icon>
-          Company
-        </ion-label>
-        <ion-input required type="text" id="input-company" [(ngModel)]="register.company" name="company"></ion-input>
-      </ion-item>
-      <p ion-text color="warning" class="text08">
-        <ion-text color="warning">
-          This field is required
-        </ion-text>
-      </p>
-    </form>
+    <ion-row class="ion-align-items-center">
+      <ion-col size="1">
+      </ion-col>
+      <ion-col size="10"> 
+        <!-- Register form -->
+        <form class="list-form">
+          <ion-item no-padding class="animated fadeInUp" >
+            <ion-label position="floating">
+              <ion-icon name="person-circle-outline" item-start></ion-icon>
+              Full Name
+            </ion-label>
+              <ion-input required type="text" id="input-name" [(ngModel)]="register.name" name="name"></ion-input>
+          </ion-item>
+          <ion-item no-padding class="animated fadeInUp">
+            <ion-label position="floating">
+              <ion-icon name="mail" item-start></ion-icon>
+              Email
+            </ion-label>
+            <ion-input required type="text" id="input-email" [(ngModel)]="register.email" name="email"></ion-input>
+          </ion-item>
+          <ion-item no-padding class="animated fadeInUp">
+            <ion-label position="floating">
+              <ion-icon name="lock-closed-outline" item-start></ion-icon>
+              Password
+            </ion-label>
+            <ion-input required type="password" id="input-password" [(ngModel)]="register.password" name="password"></ion-input>
+          </ion-item>
+          <ion-item no-padding class="animated fadeInUp">
+            <ion-label position="floating">
+              <ion-icon name="lock-closed-outline" item-start></ion-icon>
+              Confirm Password
+            </ion-label>
+            <ion-input required type="password" id="input-confirm-password" [(ngModel)]="register.confirmPassword" name="confirmpassword"></ion-input>
+          </ion-item>
+          <ion-item no-padding class="animated fadeInUp">
+            <ion-label position="floating">
+              <ion-icon name="briefcase-outline" item-start></ion-icon>
+              Company
+            </ion-label>
+            <ion-input required type="text" id="input-company" [(ngModel)]="register.company" name="company"></ion-input>
+          </ion-item>
+          <ion-item no-padding class="animated fadeInUp">
+            <ion-label position="floating">
+              <ion-icon name="briefcase-outline" item-start></ion-icon>
+              UserType (association or Company)
+            </ion-label>
+            <ion-input required type="text" id="input-userType" [(ngModel)]="register.userType" name="UserType"></ion-input>
+          </ion-item>
+        </form>
+        <br>
+        <ion-button fill="outline" color="light" (click)="clear()" size="small" id="btn-cancel">
+          <ion-icon slot="end" name="close"></ion-icon>Clear
+        </ion-button>
+        <br><br>
+
+        <ion-button icon-left size="medium" expand="full" shape="round" color="light" id="btn-confirm" (click)="saveRegister()">
+          <ion-icon name="log-in"></ion-icon>
+          Sign Up
+        </ion-button>
+      
+
+      </ion-col>
+      <ion-col size="4">
+      </ion-col>
+    </ion-row>
+
+
 
     <div margin-top>
-      <ion-button icon-left size="medium" expand="full" shape="round" color="dark" id="btn-confirm" (click)="saveRegister()">
-        <ion-icon name="log-in"></ion-icon>
-        Sign Up
-      </ion-button>
-      <ion-button fill="outline" color="tertiary" (click)="clear()" size="small" id="btn-cancel">
-           <ion-icon slot="end" name="close"></ion-icon>Clear</ion-button>
-
-      <p text-center>
-        <ion-text color="light">
-          Or Sign Up with:
-        </ion-text>
-      </p>
-
+      
       <ion-grid class="btn-group">
         <ion-row>
           <ion-col size="4">
-            <ion-button shape="round" expand="full" fill="outline" color="tertiary">
+            <ion-button shape="round" expand="full" fill="outline" color="light">
               <ion-icon slot="icon-only" name="logo-facebook"></ion-icon>
             </ion-button>
           </ion-col>
           <ion-col size="4">
-            <ion-button shape="round" expand="full" fill="outline" color="tertiary">
+            <ion-button shape="round" expand="full" fill="outline" color="light">
               <ion-icon slot="icon-only" name="logo-twitter"></ion-icon>
             </ion-button>
           </ion-col>
           <ion-col size="4">
-            <ion-button shape="round" expand="full" fill="outline" color="tertiary">
+            <ion-button shape="round" expand="full" fill="outline" color="light">
               <ion-icon slot="icon-only" name="logo-google"></ion-icon>
             </ion-button>
           </ion-col>
         </ion-row>
       </ion-grid>
 
-    </div>
-
-    <!-- Other links -->
-    <div text-center margin-top>
-      <span (click)="goToLogin()" tappable>
-        <ion-text color="light">
-          <strong>I have an account!</strong>
-        </ion-text>
-      </span>
     </div>
 
   </div>

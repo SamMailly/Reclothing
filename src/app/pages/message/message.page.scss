@@ -6,12 +6,12 @@
 }
 
 .other-message{
-	background: var(--ion-color-tertiary);
+	background: var(--ion-color-secondary);
 	color: #fff;
 }
 
 .my-message{
-	background: var(--ion-color-secondary);
+	background: var(--ion-color-tertiary);
 	color: #fff;
 }
 
@@ -34,4 +34,11 @@
 .msg-btn{
 	--padding-start: 0.5em;
 	--padding-end: 0.5em;
+}
+
+.msg-button{
+	background: #fff;
+}
+.message-icon{
+	color: #000;
 }

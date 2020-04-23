@@ -1,16 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, NgZone } from '@angular/core';
 import { MessageService, Message } from './../../services/message/message.service';
 import { RegisterService, Register } from './../../services/register/register.service';
 import { LoadingController, IonContent } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { Observable } from 'rxjs';
-import { DocumentSnapshot, DocumentReference } from '@angular/fire/firestore';
 import { AngularFirestore } from 'angularfire2/firestore';
-//import { EventListener } from '';
-import { map } from 'rxjs/operators';
-
-
+import { database } from 'firebase';
 
 @Component({
   selector: 'app-message',
@@ -22,7 +17,7 @@ export class MessagePage implements OnInit {
     name: '',
     userId: '',
     text: '',
-    date: new Date()
+    date: ''
   }
 
   messages: Message[]
@@ -33,12 +28,16 @@ export class MessagePage implements OnInit {
 
   email: string;
 
+  createdAt: Date;
+
+
   @ViewChild(IonContent, {static: false}) content: IonContent;
 
   
   constructor( private messageservice: MessageService, private loadingController: LoadingController, private route: ActivatedRoute,
-     public afAuth: AngularFireAuth, private registerservice: RegisterService, private db: AngularFirestore) {
-        
+     public afAuth: AngularFireAuth, private registerservice: RegisterService, private db: AngularFirestore,
+     ) {     
+       
       }
 
   ngOnInit() {
@@ -48,8 +47,12 @@ export class MessagePage implements OnInit {
   }
   this.messageservice.getMessages().subscribe(res =>{
     this.messages = res;
+    this.message.name = this.afAuth.auth.currentUser.email
+    this.retrieveData()
+    this.sortByDate()
 
   });
+   
 }
 
 
@@ -62,87 +65,49 @@ async loadMessage(){
   this.messageservice.getMessage(this.messageId).subscribe(res => {
     loading.dismiss();
     this.message = res;
-  });
+  });  
 }
-
-async loadRegister(){
-  const loading = await this.loadingController.create({
-    message: 'Loading Message..'
-  });
-  await loading.present();
- 
-  this.messageservice.getMessage(this.messageId).subscribe(res => {
-    loading.dismiss();
-    this.message = res;
-  });
-}
-
-    
-  /*.catch((err) => {
-    console.log('Error getting documents', err);
-  });*/
-     /* map(actions => {
-        return actions.map(a => {
-          const name = a.name;
-          const email = a.email;
-          console.log(name, email)
-          return { email, name };
-          
-        });
-      })
-    );
-    })
-  );*/
-//}
     retrieveData(){
-      var arrayObj: any;
-      //for(let i=0; i< this.db.collection('register').valueChanges().subscribe.length; i++){
       this.registerservice.getRegisters().subscribe(val => 
       {
         for(let i=0; i < val.length; i++){
             if (val[i].email == this.message.name)
               this.email = val[i].email
-              console.log(this.email)
           }
           
-        })   
-      
-      
-        /*this.registers = this.db.collection('register').valueChanges().subscribe[i]
-        console.log("toto" + this.db.collection('register').valueChanges().subscribe)
-        this.registers.filter((x) => {
-          if(x.email === this.afAuth.auth.currentUser.email)
-            this.email = x.email
-          })
-          
-        }*/
-  
-    
+        })
   }
+   
+    sortByDate(){
+      this.messages.sort((a, b) => Date.parse(a.date) - Date.parse(b.date));
+      console.log(this.messages)
+    }
 
   async sendMessage() {
     const entreredMessage = (<HTMLInputElement>document.getElementById("input-text")).value;
-    this.message.date.getDate()
-    this.message.userId = this.afAuth.auth.currentUser.uid
-    this.message.name = this.afAuth.auth.currentUser.email
-    this.retrieveData()
-    /*this.db.('registers')
-    .then(
-      ((snapshot) => {
-        snapshot.forEach((doc) => {
-          console.log(doc.id, '=>', doc.data());
-        });
-      })*/
-    //var toto: Observable<Register[]> = null;
-    /*toto = this.retrieveData()
-    for(let i=0; this.registerservice.length(); i++){
-      if (this.afAuth.auth.currentUser.email == this.registers.email){
-        this.message.name = this.registers.name
-      }else{
-        console.log("didn't match")
-      }
-    }*/
-    
+    const date= new Date()
+    var todayYear = date.getFullYear()
+    var month = date.getMonth() + 1
+    var todayMonth = (month < 10 ? '0' : '') + month
+    // if(new Date().getMonth()+1 < 10)
+    //   todayMonth = '0'+ todayMonth
+    var todayDay = (date.getDate() < 10 ? '0' : '') + date.getDate()
+    // if(new Date().getDate() < 10)
+    //   todayDay = '0'+ todayDay 
+    var todayHour = (date.getHours() < 10 ? '0' : '') + date.getHours()
+    //if(new Date().getHours() < 10)
+    //  todayHour = '0' + todayHour
+    var todayMin = (date.getMinutes() < 10 ? '0' : '') + date.getMinutes()
+    //if (new Date().getMinutes() < 10)
+    //  todayMin = '0' + todayMin
+    var todaySec = (date.getSeconds() < 10 ? '0' : '') + date.getSeconds()
+    //if (new Date().getSeconds() < 10)
+    //  todaySec = '0' + todaySec
+    var datetoday = todayYear+'-'+todayMonth+'-'+todayDay+'T'+todayHour+
+    ':'+todayMin+':'+todaySec
+
+    this.message.date = datetoday
+    this.message.userId = this.afAuth.auth.currentUser.uid    
     
     if(entreredMessage.trim().length <= 0){
         this.presentAlert();
@@ -189,25 +154,4 @@ async loadRegister(){
     return alert.present();
   }
 
-   remove(item){
-    this.messageservice.removeMessage(item.id);
-  }
-
-
-
-
-  /*checkUser(){
-    var user = this.afAuth.auth.currentUser;
-    this.afAuth.authState.subscribe(auth => {
-        
-      if (!auth) {
-        console.log('Not connected');
-      
-    } else {
-      console.log('Connected' + auth.uid);
-      console.log(user.displayName);
-      console.log(user.email);
-      }
-    });
-  }*/
 }

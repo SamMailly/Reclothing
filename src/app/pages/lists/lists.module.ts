@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { DataTablePageRoutingModule } from './data-table-routing.module';
+import { ListsPageRoutingModule } from './lists-routing.module';
 
-import { DataTablePage } from './data-table.page';
+import { ListsPage } from './lists.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    DataTablePageRoutingModule
+    ListsPageRoutingModule
   ],
-  declarations: [DataTablePage]
+  declarations: [ListsPage]
 })
-export class DataTablePageModule {}
+export class ListsPageModule {}

@@ -9,6 +9,12 @@ export interface Register{
   name: string;
   company: string;
   email: string;
+  userType: string;
+}
+
+export interface Roles {
+  reader: boolean;
+  author?: Boolean;
 }
 @Injectable({
   providedIn: 'root'
@@ -16,8 +22,10 @@ export interface Register{
 export class RegisterService {
   private registersCollection: AngularFirestoreCollection<Register>;
   private registers: Observable<Register[]>;
+  role: Roles;
 
   constructor(private db: AngularFirestore) {
+    this.role = {reader: true}
     this.registersCollection = db.collection<Register>('registers');
 
     this.registers = this.registersCollection.snapshotChanges().pipe(

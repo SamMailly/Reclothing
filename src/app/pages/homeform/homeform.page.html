@@ -1,5 +1,5 @@
 <ion-header [translucent]="true">
-  <ion-toolbar color="primary">
+  <ion-toolbar color="light">
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
       </ion-buttons>
@@ -19,9 +19,11 @@
     <ion-item-sliding *ngFor="let item of forms">
       <ion-item lines="inset" button [routerLink]="['/form', item.id]">
         <ion-label>
-          {{ item.quantity }}
-          {{ item.article }}
-          {{ item.price }}
+          <div class="row">
+            <div class="col">Items : {{ item.article }}</div>
+            <div class="col">Quantity : {{ item.quantity }}</div>
+            <div class="col">Package price : {{ item.price }} €</div>
+          </div>
         </ion-label>
       </ion-item>
       <ion-item-options side="end">
@@ -33,7 +35,7 @@
     </ion-item-sliding>
   </ion-list>
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button routerLink="/form" routerDirection="forward">
+    <ion-fab-button color="light" routerLink="/form" routerDirection="forward">
       <ion-icon name="add">Add new form</ion-icon>
     </ion-fab-button>
   </ion-fab>
