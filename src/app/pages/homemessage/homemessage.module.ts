@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { MessagehomePageRoutingModule } from './messagehome-routing.module';
+import { HomemessagePageRoutingModule } from './homemessage-routing.module';
 
-import { MessagehomePage } from './messagehome.page';
+import { HomemessagePage } from './homemessage.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    MessagehomePageRoutingModule
+    HomemessagePageRoutingModule
   ],
-  declarations: [MessagehomePage]
+  declarations: [HomemessagePage]
 })
-export class MessagehomePageModule {}
+export class HomemessagePageModule {}

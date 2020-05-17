@@ -20,7 +20,11 @@ const routes: Routes = [
   {
     path: 'upload',
     loadChildren: () => import('./pages/upload/upload.module').then( m => m.UploadPageModule)
+  },  {
+    path: 'homemessage',
+    loadChildren: () => import('./pages/homemessage/homemessage.module').then( m => m.HomemessagePageModule)
   },
+
 
 
   ];
